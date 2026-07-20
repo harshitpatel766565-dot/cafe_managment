@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+{% include 'includes/hero.html' %}
+
+<!-- About Section -->
+{% include 'includes/about.html' %}
+
+<!-- Why Choose Us -->
+{% include 'includes/why_choose.html' %}
+
+<!-- Testimonials -->
+{% include 'includes/testimonials.html' %}
+
+<!-- Contact Section -->
+{% include 'includes/contact_section.html' %}
+
+<!-- Our Menu -->
+<section id="menu" class="bg-gray-100 py-16">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <h2 class="text-5xl font-bold text-center mb-12">
+            Our Menu
+        </h2>
+
+        <!-- Category Buttons -->
+        <div class="flex justify-center flex-wrap gp-4 mb-10">
+
+            <a href="{% url 'home' %}"
+                class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800">
+                All
+            </a>
+
+            {% for category in categories %}
+
+            <a href="{% url 'category_filter' category.id %}"
+                class="bg-amber-700 text-white px-6 py-2 rounded-full hover:bg-amber-900">
+                {{ category.name }}
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Menu Cards -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            {% for menu in menus %}
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
+
+                {% if menu.image %}
+                <img src="{{ menu.image.url }}"
+                     alt="{{ menu.name }}"
+                     class="w-full h-64 object-cover">
+                {% endif %}
+
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold">
+                        {{ menu.name }}
+                    </h3>
+
+                    <p class="text-gray-600 mt-3">
+                        {{ menu.description }}
+                    </p>
+
+                    <p class="text-amber-700 text-2xl font-bold mt-4">
+                        ₹ {{ menu.price }}
+                    </p>
+
+                    <p class="text-sm text-gray-500 mt-2">
+                        Category: {{ menu.category.name }}
+                    </p>
+
+                    <a href="{% url 'add_to_cart' menu.id %}"
+                       class="block text-center mt-6 w-full bg-amber-700 hover:bg-amber-800 text-white py-3 rounded-lg transition">
+
+                        Add To Cart
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-span-3 text-center text-2xl font-semibold text-gray-600">
+                No Menu Available
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

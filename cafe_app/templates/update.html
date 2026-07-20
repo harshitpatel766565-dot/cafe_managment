@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>update</title>
+</head>
+<body>
+
+<h1>User update</h1>
+
+<form  action="{% url 'update' datas.id%}"method="POST">
+
+    {% csrf_token %}
+
+    <input type="text" name="first_name" value="{{datas.first_name}}" placeholder="First Name"><br><br>
+
+    <input type="text" name="last_name" value="{{datas.last_name}}" placeholder="Last Name"><br><br>
+
+    <input type="text" name="username" value="{{datas.username}}" placeholder="Username"><br><br>
+
+    <input type="email" name="email" value="{{datas.email}}" placeholder="Email"><br><br>
+
+    
+    <button type="submit">update</button>
+
+</form>
+
+
+</body>
+</html>

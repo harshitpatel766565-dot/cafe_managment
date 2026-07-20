@@ -1,0 +1,123 @@
+<nav class="fixed top-0 left-0 w-full z-50 bg-stone-900/95 backdrop-blur-md border-b border-amber-700 shadow-xl">
+
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+        <!-- Logo -->
+        <a href="{% url 'home' %}"
+           class="text-3xl font-bold text-amber-400">
+            ☕ CafeHub
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8 text-white font-medium">
+
+            <a href="{% url 'home' %}"
+               class="hover:text-amber-400 transition duration-300">
+                Home
+            </a>
+
+            <a href="#menu"
+               class="hover:text-amber-400 transition duration-300">
+                Menu
+            </a>
+
+            <a href="#contact"
+               class="hover:text-amber-400 transition duration-300">
+                Contact
+            </a>
+
+            <a href="{% url 'cart' %}"
+               class="hover:text-amber-400 transition duration-300">
+                🛒 Cart
+            </a>
+
+            {% if request.session.customer_id %}
+
+                <a href="{% url 'logout' %}"
+                   class="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-lg transition">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="hover:text-amber-400 transition duration-300">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}"
+                   class="bg-amber-500 hover:bg-amber-600 px-5 py-2 rounded-lg transition">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn"
+                class="md:hidden text-white text-3xl">
+            ☰
+        </button>
+
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+         class="hidden md:hidden bg-stone-900 border-t border-amber-700">
+
+        <div class="flex flex-col text-white px-6 py-4 space-y-4">
+
+            <a href="{% url 'home' %}" class="hover:text-amber-400">
+                Home
+            </a>
+
+            <a href="#menu" class="hover:text-amber-400">
+                Menu
+            </a>
+
+            <a href="#contact" class="hover:text-amber-400">
+                Contact
+            </a>
+
+            <a href="{% url 'cart' %}" class="hover:text-amber-400">
+                🛒 Cart
+            </a>
+
+            {% if request.session.customer_id %}
+
+                <a href="{% url 'logout' %}"
+                   class="bg-red-500 text-center py-2 rounded-lg">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="hover:text-amber-400">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}"
+                   class="bg-amber-500 text-center py-2 rounded-lg">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<script>
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+    });
+</script>
